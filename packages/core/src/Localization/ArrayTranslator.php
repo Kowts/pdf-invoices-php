@@ -19,10 +19,15 @@ final readonly class ArrayTranslator implements TranslatorInterface
 
     public static function default(): self
     {
+        /** @var array<string, string> $english */
+        $english = require dirname(__DIR__, 2) . '/resources/translations/en.php';
+        /** @var array<string, string> $portuguese */
+        $portuguese = require dirname(__DIR__, 2) . '/resources/translations/pt_PT.php';
+
         return new self([
-            'en' => require dirname(__DIR__, 2) . '/resources/translations/en.php',
-            'pt_PT' => require dirname(__DIR__, 2) . '/resources/translations/pt_PT.php',
-            'pt' => require dirname(__DIR__, 2) . '/resources/translations/pt_PT.php',
+            'en' => $english,
+            'pt_PT' => $portuguese,
+            'pt' => $portuguese,
         ]);
     }
 

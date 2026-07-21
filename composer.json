@@ -52,16 +52,17 @@
     "pdf-invoices/core": "^0.1"
   },
   "require-dev": {
+    "dompdf/dompdf": "^2.0 || ^3.0",
+    "friendsofphp/php-cs-fixer": "^3.64",
     "phpunit/phpunit": "^11.5",
     "phpstan/phpstan": "^2.1",
-    "friendsofphp/php-cs-fixer": "^3.64",
     "rector/rector": "^2.0"
   },
   "scripts": {
-    "test": "phpunit",
-    "analyse": "phpstan analyse",
-    "cs": "php-cs-fixer fix --dry-run --diff",
-    "rector": "rector process --dry-run",
+    "test": "@php vendor/bin/phpunit",
+    "analyse": "@php vendor/bin/phpstan analyse --memory-limit=512M",
+    "cs": "@php vendor/bin/php-cs-fixer fix --dry-run --diff",
+    "rector": "@php vendor/bin/rector process --dry-run",
     "qa": [
       "@cs",
       "@analyse",
