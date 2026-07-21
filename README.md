@@ -393,16 +393,17 @@ O projeto está em fase beta e pronto para a primeira release `0.1.0`. O core,
 os templates, os exemplos e os bridges iniciais já existem, com CI em Linux e
 Windows para PHP 8.2, 8.3 e 8.4.
 
-Antes de declarar estabilidade `1.0`, ainda faltam testes de integração
-completos para Laravel, Yii2 e Symfony e snapshots de PDF.
+Antes de declarar estabilidade `1.0`, ainda faltam validações em aplicações
+reais Laravel, Yii2 e Symfony, snapshots visuais/PDF e uma política mais
+completa para assets externos.
 
 ## Roadmap curto
 
-- estabilizar o core `kowts/pdf-invoices`;
-- completar testes de contrato para drivers PDF;
-- adicionar suites de integração dos bridges;
-- publicar o package Composer `kowts/pdf-invoices` no Packagist;
-- endurecer politicas de assets para drivers PDF.
+- validar o package publicado no Packagist após cada release;
+- adicionar snapshots HTML/PDF por template e por driver principal;
+- testar os bridges em aplicações reais Laravel, Symfony e Yii2;
+- adicionar allowlist de assets remotos por domínio/MIME/tamanho;
+- preparar a próxima release beta `0.2.0` com melhorias de templates.
 
 ## Licença
 
