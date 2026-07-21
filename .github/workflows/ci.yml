@@ -20,5 +20,12 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
       - uses: ramsey/composer-install@v3
-      - run: composer qa
-
+      - name: Check code style
+        if: matrix.php == '8.2'
+        run: composer cs
+      - name: Run static analysis
+        run: composer analyse
+      - name: Run tests
+        run: composer test
+      - name: Check Rector
+        run: composer rector
