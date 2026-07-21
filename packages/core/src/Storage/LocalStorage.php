@@ -53,13 +53,28 @@ final readonly class LocalStorage implements StorageInterface
 
     private function resolvePath(string $path): string
     {
-        if (str_contains($path, "\0") || str_contains(str_replace('\\', '/', $path), '../')) {
+        $normalizedRelativePath = str_replace('\\', '/', $path);
+
+        if (
+            str_contains($path, "\0")
+            || str_contains($normalizedRelativePath, '../')
+            || str_starts_with($normalizedRelativePath, '/')
+            || preg_match('/^[a-zA-Z]:\//', $normalizedRelativePath) === 1
+        ) {
             throw new InvoiceException('Storage path is not allowed.');
         }
 
-        $base = rtrim($this->basePath, DIRECTORY_SEPARATOR);
-        $target = $base . DIRECTORY_SEPARATOR . ltrim($path, DIRECTORY_SEPARATOR);
+        $base = rtrim(str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $this->basePath), DIRECTORY_SEPARATOR);
+
+        if (! is_dir($base)) {
+            mkdir($base, 0775, true);
+        }
+
         $baseReal = realpath($base) ?: $base;
+        $target = $baseReal . DIRECTORY_SEPARATOR . ltrim(
+            str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path),
+            DIRECTORY_SEPARATOR,
+        );
         $targetDirectory = dirname($target);
 
         if (! is_dir($targetDirectory)) {
@@ -67,13 +82,23 @@ final readonly class LocalStorage implements StorageInterface
         }
 
         $directoryReal = realpath($targetDirectory) ?: $targetDirectory;
-        $normalizedBase = rtrim(str_replace('\\', '/', $baseReal), '/');
-        $normalizedDirectory = rtrim(str_replace('\\', '/', $directoryReal), '/');
+        $normalizedBase = $this->normalizePath($baseReal);
+        $normalizedDirectory = $this->normalizePath($directoryReal);
 
-        if (! str_starts_with($normalizedDirectory, $normalizedBase)) {
+        if (
+            $normalizedDirectory !== $normalizedBase
+            && ! str_starts_with($normalizedDirectory, $normalizedBase . '/')
+        ) {
             throw new InvoiceException('Storage path escapes the base directory.');
         }
 
         return $target;
+    }
+
+    private function normalizePath(string $path): string
+    {
+        $normalized = rtrim(str_replace('\\', '/', $path), '/');
+
+        return DIRECTORY_SEPARATOR === '\\' ? strtolower($normalized) : $normalized;
     }
 }
