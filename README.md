@@ -360,6 +360,7 @@ O CI executa a matriz em Linux e Windows para PHP 8.2, 8.3 e 8.4.
 - [Segurança](docs/security.md)
 - [Compatibilidade](docs/compatibility.md)
 - [Análise do repositório de referência](docs/reference-analysis.md)
+- [Packagist](docs/packagist.md)
 - [Roadmap](docs/roadmap.md)
 - [Checklist de implementação](docs/implementation-checklist.md)
 - [ADR 0001 - Monorepo](docs/adr/0001-monorepo.md)
