@@ -29,13 +29,11 @@ final readonly class Money
         'XPF' => 0,
     ];
 
-    private int $minorAmount;
-
     private string $currency;
 
     private int $fractionDigits;
 
-    public function __construct(int $minorAmount, string $currency, int $fractionDigits = 2)
+    public function __construct(private int $minorAmount, string $currency, int $fractionDigits = 2)
     {
         $currency = strtoupper($currency);
 
@@ -47,7 +45,6 @@ final readonly class Money
             throw new InvalidArgumentException('Fraction digits must be between 0 and 6.');
         }
 
-        $this->minorAmount = $minorAmount;
         $this->currency = $currency;
         $this->fractionDigits = $fractionDigits;
     }

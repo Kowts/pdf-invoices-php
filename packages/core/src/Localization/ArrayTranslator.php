@@ -33,7 +33,7 @@ final readonly class ArrayTranslator implements TranslatorInterface
 
     public function trans(string $key, array $replace = [], ?string $locale = null): string
     {
-        $locale = $locale ?? $this->defaultLocale;
+        $locale ??= $this->defaultLocale;
         $line = $this->catalogues[$locale][$key] ?? $this->catalogues[$this->defaultLocale][$key] ?? $key;
 
         foreach ($replace as $name => $value) {
