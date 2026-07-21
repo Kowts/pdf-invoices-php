@@ -24,6 +24,28 @@ Dominio: Invoice, InvoiceItem, Party, Address, Money, Percentage, Quantity
 PHP 8.2+, sem framework obrigatório
 ```
 
+## Fluxo de geração
+
+```mermaid
+flowchart TD
+    A["Aplicação<br/>PHP puro, Laravel, Yii2 ou Symfony"] --> B["InvoiceBuilder / objetos de domínio"]
+    B --> C["InvoiceGenerator"]
+    C --> D["InvoiceValidatorInterface"]
+    C --> E["InvoiceCalculator"]
+    C --> F["TemplateRendererInterface"]
+    F --> G["TemplateResolverInterface"]
+    F --> H["TemplateContext<br/>tradutor, formatter, totais"]
+    H --> I["HTML da fatura"]
+    I --> J{"Modo de output"}
+    J -->|Preview| K["GeneratedDocument<br/>text/html"]
+    J -->|PDF| L["PdfEngineInterface"]
+    L --> M["DompdfEngine<br/>ou outro driver"]
+    M --> N["GeneratedDocument<br/>application/pdf"]
+    K --> O["StorageInterface<br/>ficheiro local ou adapter"]
+    N --> O
+    O --> P["Download, stream ou ficheiro guardado"]
+```
+
 ## Estrutura principal
 
 ```text
@@ -80,4 +102,3 @@ config/
 | Traducao Laravel | Mover | `LaravelTranslator` fica em `src/Bridge/Laravel`. |
 | Facade | Opcional | Incluida no bridge Laravel, API principal usa DI. |
 | Commands | Futuro | Nao e necessario no MVP. |
-
