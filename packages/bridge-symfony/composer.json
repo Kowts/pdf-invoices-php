@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": "^8.2",
-    "pdf-invoices/core": "*",
+    "pdf-invoices/core": "^0.1",
     "symfony/config": "^7.4 || ^8.0",
     "symfony/dependency-injection": "^7.4 || ^8.0",
     "symfony/http-foundation": "^7.4 || ^8.0",

@@ -10,34 +10,46 @@
       "type": "path",
       "url": "packages/core",
       "options": {
-        "symlink": true
+        "symlink": true,
+        "versions": {
+          "pdf-invoices/core": "0.1.x-dev"
+        }
       }
     },
     {
       "type": "path",
       "url": "packages/bridge-laravel",
       "options": {
-        "symlink": true
+        "symlink": true,
+        "versions": {
+          "pdf-invoices/laravel": "0.1.x-dev"
+        }
       }
     },
     {
       "type": "path",
       "url": "packages/bridge-yii2",
       "options": {
-        "symlink": true
+        "symlink": true,
+        "versions": {
+          "pdf-invoices/yii2": "0.1.x-dev"
+        }
       }
     },
     {
       "type": "path",
       "url": "packages/bridge-symfony",
       "options": {
-        "symlink": true
+        "symlink": true,
+        "versions": {
+          "pdf-invoices/symfony": "0.1.x-dev"
+        }
       }
     }
   ],
   "require": {
     "php": "^8.2",
-    "pdf-invoices/core": "*"
+    "pdf-invoices/core": "^0.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^11.5",
@@ -62,4 +74,3 @@
     "allow-plugins": {}
   }
 }
-
