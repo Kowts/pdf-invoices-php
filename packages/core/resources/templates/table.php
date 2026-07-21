@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use PdfInvoices\Core\Support\Escaper;
+
 ?>
 <table>
     <thead>
