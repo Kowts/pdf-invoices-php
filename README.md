@@ -1,10 +1,13 @@
 # PDF Invoices para PHP
 
-[![Testes](https://github.com/Kowts/pdf-invoices-php/actions/workflows/ci.yml/badge.svg)](https://github.com/Kowts/pdf-invoices-php/actions/workflows/ci.yml)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-4e9a06.svg)](phpstan.neon.dist)
+[![Testes](https://img.shields.io/github/actions/workflow/status/Kowts/pdf-invoices-php/ci.yml?branch=main&label=Testes)](https://github.com/Kowts/pdf-invoices-php/actions/workflows/ci.yml)
+[![Cobertura](https://img.shields.io/badge/cobertura-%E2%89%A560%25-brightgreen.svg)](https://github.com/Kowts/pdf-invoices-php/actions/workflows/ci.yml)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-4e9a06.svg)](phpstan.neon.dist)
 [![PHP](https://img.shields.io/badge/PHP-%5E8.2-777BB4.svg)](https://www.php.net/)
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-blue.svg)](LICENSE)
-![Status](https://img.shields.io/badge/status-alfa-orange.svg)
+[![Packagist](https://img.shields.io/packagist/v/pdf-invoices/core.svg)](https://packagist.org/packages/pdf-invoices/core)
+[![Aikido package health](https://img.shields.io/badge/Aikido-package%20health-6f5bf4.svg)](https://intel.aikido.dev/packages/packagist/pdf-invoices/core)
+![Status](https://img.shields.io/badge/status-beta-orange.svg)
 
 Biblioteca PHP independente de frameworks para construir faturas, calcular
 totais monetários com segurança, renderizar templates HTML e gerar documentos
