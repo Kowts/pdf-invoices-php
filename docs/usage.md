@@ -34,6 +34,54 @@ $document->save(__DIR__ . '/invoice-preview.html');
 Para PDF real, instalar `dompdf/dompdf` e injetar `DompdfEngine` no
 `InvoiceGenerator`.
 
+## Drivers PDF
+
+Todos os drivers implementam `PdfEngineInterface`, por isso a troca acontece na
+construcao do `InvoiceGenerator`.
+
+| Driver | Instalar | Classe |
+| --- | --- | --- |
+| Dompdf | `composer require dompdf/dompdf` | `DompdfEngine` |
+| mPDF | `composer require mpdf/mpdf` | `MpdfEngine` |
+| TCPDF | `composer require tecnickcom/tcpdf` | `TcpdfEngine` |
+| Browsershot | `composer require spatie/browsershot` e `npm install puppeteer` | `BrowsershotEngine` |
+
+Exemplo com mPDF:
+
+```php
+use PdfInvoices\Core\Pdf\MpdfEngine;
+
+$generator = new InvoiceGenerator(
+    new MpdfEngine(),
+    $renderer,
+    $calculator,
+    $translator,
+    $currencyFormatter,
+    $validator,
+);
+```
+
+Exemplo com Browsershot:
+
+```php
+use PdfInvoices\Core\Pdf\BrowsershotEngine;
+
+$generator = new InvoiceGenerator(
+    new BrowsershotEngine(
+        chromePath: '/usr/bin/google-chrome',
+        timeoutSeconds: 90,
+    ),
+    $renderer,
+    $calculator,
+    $translator,
+    $currencyFormatter,
+    $validator,
+);
+```
+
+`PdfOptions` controla formato, orientacao, margens e recursos remotos quando o
+driver suporta essa restricao.
+
 ## Templates customizados
 
 Pode usar os templates oficiais por nome:

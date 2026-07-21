@@ -52,10 +52,12 @@
 
 ## Fase 7 - Drivers adicionais
 
+- Estado: concluido para adapters iniciais.
 - Dompdf hardening.
 - mPDF adapter.
 - TCPDF adapter.
-- Browsershot/Chromium adapter com sandbox e allowlist.
+- Browsershot/Chromium adapter com JavaScript desativado por defeito.
+- Proximo passo: allowlist de assets e snapshots PDF por driver.
 - Dimensão: grande.
 
 ## Fase 8 - Documentação, hardening e lançamento
@@ -78,13 +80,12 @@ Incluído:
 - inglês e português;
 - storage local;
 - geração HTML preview e contrato PDF;
-- Dompdf opcional;
+- Dompdf, mPDF, TCPDF e Browsershot opcionais;
 - testes unitários preparados;
 - exemplo funcional sem framework.
 
 Fora do MVP:
 
-- mPDF, TCPDF e Browsershot;
 - Blade/Twig completos;
 - QR Code;
 - filas, mailables e commands;

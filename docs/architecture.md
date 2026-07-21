@@ -39,7 +39,7 @@ flowchart TD
     I --> J{"Modo de output"}
     J -->|Preview| K["GeneratedDocument<br/>text/html"]
     J -->|PDF| L["PdfEngineInterface"]
-    L --> M["DompdfEngine<br/>ou outro driver"]
+    L --> M["DompdfEngine<br/>MpdfEngine<br/>TcpdfEngine<br/>BrowsershotEngine"]
     M --> N["GeneratedDocument<br/>application/pdf"]
     K --> O["StorageInterface<br/>ficheiro local ou adapter"]
     N --> O
@@ -96,8 +96,7 @@ config/
 | DTOs | Adaptar | Objetos de dominio imutaveis. |
 | Calculos | Reescrever | `InvoiceCalculator` com `Money` inteiro. |
 | Templates | Adaptar | PHP nativo no core; Blade/Twig ficam opcionais. |
-| Dompdf | Tornar opcional | `DompdfEngine` sem dependencia obrigatoria. |
-| Browsershot | Futuro opcional | Nao entra no MVP por peso e superficie de risco. |
+| PDF engines | Tornar opcionais | Dompdf, mPDF, TCPDF e Browsershot atras de `PdfEngineInterface`. |
 | Storage Laravel | Mover | `LaravelStorage` fica em `src/Bridge/Laravel`. |
 | Traducao Laravel | Mover | `LaravelTranslator` fica em `src/Bridge/Laravel`. |
 | Facade | Opcional | Incluida no bridge Laravel, API principal usa DI. |

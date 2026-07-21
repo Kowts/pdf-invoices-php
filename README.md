@@ -40,7 +40,7 @@ Yii2, mantendo as regras de domínio fora dos frameworks.
 - formatação monetária simples e substituível;
 - armazenamento local seguro contra path traversal básico;
 - contrato `PdfEngineInterface` para motores PDF;
-- engine Dompdf opcional;
+- engines opcionais para Dompdf, mPDF, TCPDF e Browsershot;
 - preview HTML para testes e desenvolvimento;
 - bridges oficiais para Laravel, Yii2 e Symfony;
 - responses de download nos bridges;
@@ -75,7 +75,8 @@ integracoes opcionais vivem em `src/Bridge/Laravel`, `src/Bridge/Yii2` e
 - PHP 8.2 ou superior;
 - Composer 2;
 - extensão `json`;
-- `dompdf/dompdf`, apenas quando quiser gerar PDF real com Dompdf.
+- um driver PDF opcional: `dompdf/dompdf`, `mpdf/mpdf`,
+  `tecnickcom/tcpdf` ou `spatie/browsershot`.
 
 Para desenvolvimento do package:
 
@@ -96,6 +97,14 @@ Para usar Dompdf:
 
 ```bash
 composer require dompdf/dompdf
+```
+
+Drivers alternativos:
+
+```bash
+composer require mpdf/mpdf
+composer require tecnickcom/tcpdf
+composer require spatie/browsershot
 ```
 
 Para testar antes da publicação no Packagist, clone este repositorio e aponte a
@@ -178,8 +187,8 @@ O exemplo completo está em [examples/plain-php/generate.php](examples/plain-php
 
 O core gera documentos através de `PdfEngineInterface`.
 
-Para produção com Dompdf, instale o driver e injete `DompdfEngine` no
-`InvoiceGenerator`:
+Para produção, instale um driver e injete a engine pretendida no
+`InvoiceGenerator`. Exemplo com Dompdf:
 
 ```php
 use PdfInvoices\Core\Calculation\InvoiceCalculator;
@@ -204,8 +213,18 @@ $pdf = $generator->generate($invoice, 'branded');
 $pdf->save(__DIR__ . '/invoice.pdf');
 ```
 
-Recursos remotos estão desativados por defeito. Ative-os apenas com uma política
-de segurança adequada.
+Drivers disponiveis:
+
+| Driver | Package | Engine |
+| --- | --- | --- |
+| Dompdf | `dompdf/dompdf` | `DompdfEngine` |
+| mPDF | `mpdf/mpdf` | `MpdfEngine` |
+| TCPDF | `tecnickcom/tcpdf` | `TcpdfEngine` |
+| Browsershot | `spatie/browsershot` + Puppeteer/Chromium | `BrowsershotEngine` |
+
+Recursos remotos e JavaScript ficam restritos por defeito nos drivers onde o
+package consegue aplicar essa politica. Ative-os apenas com uma politica de
+seguranca adequada.
 
 ## Integração com Laravel
 
@@ -331,7 +350,7 @@ descontos, impostos, retenções, arredondamento e notas de crédito.
 
 - escape de HTML nos templates oficiais;
 - recursos remotos desativados por defeito;
-- JavaScript desativado no Dompdf;
+- JavaScript desativado por defeito no Dompdf e no Browsershot;
 - storage local com bloqueio básico contra path traversal;
 - validação da fatura antes da renderização;
 - sem logging automático de dados fiscais;
@@ -383,7 +402,7 @@ completos para Laravel, Yii2 e Symfony e snapshots de PDF.
 - completar testes de contrato para drivers PDF;
 - adicionar suites de integração dos bridges;
 - publicar o package Composer `kowts/pdf-invoices` no Packagist;
-- adicionar drivers opcionais para mPDF, TCPDF e Browsershot.
+- endurecer politicas de assets para drivers PDF.
 
 ## Licença
 

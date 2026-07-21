@@ -10,7 +10,7 @@
 - [x] Implementar core sem frameworks.
 - [x] Implementar dinheiro sem `float` como representação principal.
 - [x] Criar templates PHP nativos.
-- [x] Criar engine Dompdf opcional.
+- [x] Criar engines PDF opcionais para Dompdf, mPDF, TCPDF e Browsershot.
 - [x] Criar storage local.
 - [x] Criar bridges Laravel, Yii2 e Symfony.
 - [x] Adicionar testes unitários do core.

@@ -10,6 +10,10 @@ ponto de partida para aplicacoes reais.
 - [html-preview.php](plain-php/html-preview.php): gera HTML com o renderer de
   preview.
 - [dompdf-pdf.php](plain-php/dompdf-pdf.php): gera PDF real com Dompdf.
+- [mpdf-pdf.php](plain-php/mpdf-pdf.php): gera PDF real com mPDF.
+- [tcpdf-pdf.php](plain-php/tcpdf-pdf.php): gera PDF real com TCPDF.
+- [browsershot-pdf.php](plain-php/browsershot-pdf.php): gera PDF real com
+  Browsershot/Chromium.
 - [tax-included.php](plain-php/tax-included.php): demonstra imposto incluido no
   preco.
 - [credit-note.php](plain-php/credit-note.php): demonstra uma nota de credito
@@ -42,6 +46,20 @@ Para PDF real:
 ```bash
 composer require dompdf/dompdf
 php examples/plain-php/dompdf-pdf.php
+```
+
+Drivers alternativos:
+
+```bash
+composer require mpdf/mpdf
+php examples/plain-php/mpdf-pdf.php
+
+composer require tecnickcom/tcpdf
+php examples/plain-php/tcpdf-pdf.php
+
+composer require spatie/browsershot
+npm install puppeteer
+php examples/plain-php/browsershot-pdf.php
 ```
 
 Os ficheiros gerados ficam em `build/`.

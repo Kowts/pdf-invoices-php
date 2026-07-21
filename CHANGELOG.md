@@ -5,6 +5,16 @@ Todas as alteracoes relevantes deste projeto serao documentadas neste ficheiro.
 O formato segue [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) e o
 projeto usa [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Adicionado
+
+- Resolver para diretorios de templates customizados com fallback para os
+  templates oficiais.
+- Drivers PDF opcionais para mPDF, TCPDF e Browsershot.
+- Exemplos plain PHP para templates customizados e drivers PDF alternativos.
+- Testes de contrato para mPDF e TCPDF.
+
 ## [0.1.0] - 2026-07-21
 
 ### Adicionado
