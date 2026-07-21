@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use PdfInvoices\Yii2\PdfInvoicesComponent;
+use PdfInvoices\Core\Bridge\Yii2\PdfInvoicesComponent;
 
 return [
     'components' => [

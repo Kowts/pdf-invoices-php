@@ -1,7 +1,12 @@
 parameters:
-    level: max
+    level: 8
     paths:
-        - packages/core/src
-        - packages/core/tests
+        - src
+        - tests
+    scanFiles:
+        - tests/Stubs/Yii.php
+        - tests/Stubs/Yii2/base/Application.php
+        - tests/Stubs/Yii2/base/BootstrapInterface.php
+        - tests/Stubs/Yii2/base/Component.php
+        - tests/Stubs/Yii2/web/Response.php
     treatPhpDocTypesAsCertain: false
-

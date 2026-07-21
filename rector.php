@@ -6,8 +6,7 @@ use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__ . '/packages/core/src',
-        __DIR__ . '/packages/core/tests',
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
     ])
     ->withPhpSets(php82: true);
-

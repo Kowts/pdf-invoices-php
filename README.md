@@ -5,8 +5,8 @@
 [![PHPStan](https://img.shields.io/badge/PHPStan-level%208-4e9a06.svg)](phpstan.neon.dist)
 [![PHP](https://img.shields.io/badge/PHP-%5E8.2-777BB4.svg)](https://www.php.net/)
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-blue.svg)](LICENSE)
-[![Packagist](https://img.shields.io/packagist/v/pdf-invoices/core.svg)](https://packagist.org/packages/pdf-invoices/core)
-[![Aikido package health](https://img.shields.io/badge/Aikido-package%20health-6f5bf4.svg)](https://intel.aikido.dev/packages/packagist/pdf-invoices/core)
+[![Packagist](https://img.shields.io/packagist/v/kowts/pdf-invoices.svg)](https://packagist.org/packages/kowts/pdf-invoices)
+[![Aikido package health](https://img.shields.io/badge/Aikido-package%20health-6f5bf4.svg)](https://intel.aikido.dev/packages/packagist/kowts/pdf-invoices)
 ![Status](https://img.shields.io/badge/status-beta-orange.svg)
 
 Biblioteca PHP independente de frameworks para construir faturas, calcular
@@ -24,7 +24,7 @@ Yii2, mantendo as regras de domínio fora dos frameworks.
 ## Funcionalidades
 
 - core PHP puro, sem Laravel, Symfony, Yii2, Carbon, Blade, Twig ou facades;
-- monorepo com packages Composer independentes;
+- package Composer unico com bridges opcionais;
 - domínio tipado para fatura, linhas, entidades, moradas, percentagens e moeda;
 - builders fluentes para `Invoice`, `InvoiceItem` e `Party`;
 - cálculos monetários sem `float` como representação principal;
@@ -54,7 +54,7 @@ Aplicações PHP / Laravel / Yii2 / Symfony
     ↓
 Bridges e adaptadores
     ↓
-pdf-invoices/core
+kowts/pdf-invoices
     ↓
 PHP 8.2+ e contratos independentes
 ```
@@ -64,12 +64,11 @@ filesystems, responses e configuração de cada framework.
 
 Consulte [Arquitetura](docs/architecture.md) para a organização completa.
 
-## Packages
+## Package
 
-- `pdf-invoices/core`;
-- `pdf-invoices/laravel`;
-- `pdf-invoices/yii2`;
-- `pdf-invoices/symfony`.
+O package publicavel e `kowts/pdf-invoices`. O core vive em `src/` e as
+integracoes opcionais vivem em `src/Bridge/Laravel`, `src/Bridge/Yii2` e
+`src/Bridge/Symfony`.
 
 ## Requisitos
 
@@ -78,7 +77,7 @@ Consulte [Arquitetura](docs/architecture.md) para a organização completa.
 - extensão `json`;
 - `dompdf/dompdf`, apenas quando quiser gerar PDF real com Dompdf.
 
-Para desenvolvimento do monorepo:
+Para desenvolvimento do package:
 
 - PHPUnit 11;
 - PHPStan;
@@ -87,10 +86,10 @@ Para desenvolvimento do monorepo:
 
 ## Instalação
 
-Quando os packages forem publicados:
+Quando o package for publicado:
 
 ```bash
-composer require pdf-invoices/core
+composer require kowts/pdf-invoices
 ```
 
 Para usar Dompdf:
@@ -99,22 +98,22 @@ Para usar Dompdf:
 composer require dompdf/dompdf
 ```
 
-Para testar antes da publicação no Packagist, clone este monorepo e aponte a
-aplicação consumidora para o package pretendido com um repositório `path`:
+Para testar antes da publicação no Packagist, clone este repositorio e aponte a
+aplicação consumidora para ele com um repositório `path`:
 
 ```json
 {
     "repositories": [
         {
             "type": "path",
-            "url": "../pdf-invoices-php/packages/core",
+            "url": "../pdf-invoices-php/.",
             "options": {
                 "symlink": true
             }
         }
     ],
     "require": {
-        "pdf-invoices/core": "^0.1"
+        "kowts/pdf-invoices": "^0.1"
     }
 }
 ```
@@ -213,7 +212,7 @@ de segurança adequada.
 Instale o bridge na aplicação Laravel:
 
 ```bash
-composer require pdf-invoices/laravel
+composer require kowts/pdf-invoices
 ```
 
 Publique a configuração:
@@ -250,13 +249,13 @@ API recomendada.
 Instale o bridge na aplicação Yii2:
 
 ```bash
-composer require pdf-invoices/yii2
+composer require kowts/pdf-invoices
 ```
 
 Configuração mínima em `config/web.php`:
 
 ```php
-use PdfInvoices\Yii2\PdfInvoicesComponent;
+use PdfInvoices\Core\Bridge\Yii2\PdfInvoicesComponent;
 
 return [
     'components' => [
@@ -282,7 +281,7 @@ O bridge pode ser usado em aplicações web e console.
 Instale o bridge na aplicação Symfony:
 
 ```bash
-composer require pdf-invoices/symfony
+composer require kowts/pdf-invoices
 ```
 
 Configuração mínima:
@@ -363,7 +362,7 @@ O CI executa a matriz em Linux e Windows para PHP 8.2, 8.3 e 8.4.
 - [Packagist](docs/packagist.md)
 - [Roadmap](docs/roadmap.md)
 - [Checklist de implementação](docs/implementation-checklist.md)
-- [ADR 0001 - Monorepo](docs/adr/0001-monorepo.md)
+- [ADR 0001 - Package unico](docs/adr/0001-monorepo.md)
 - [ADR 0002 - Dinheiro](docs/adr/0002-money.md)
 - [Exemplos completos](examples/README.md)
 
@@ -375,10 +374,10 @@ Symfony, snapshots de PDF e validação em ambiente PHP 8.2+ no computador local
 
 ## Roadmap curto
 
-- estabilizar o core `pdf-invoices/core`;
+- estabilizar o core `kowts/pdf-invoices`;
 - completar testes de contrato para drivers PDF;
 - adicionar suites de integração dos bridges;
-- publicar packages Composer separados;
+- publicar o package Composer `kowts/pdf-invoices`;
 - preparar release `0.1.0`;
 - adicionar drivers opcionais para mPDF, TCPDF e Browsershot.
 

@@ -1,62 +1,59 @@
 {
-  "name": "pdf-invoices/php-monorepo",
-  "description": "Framework-independent PDF invoice packages for PHP with official bridges.",
-  "type": "project",
+  "name": "kowts/pdf-invoices",
+  "description": "Biblioteca PHP independente de frameworks para gerar faturas PDF.",
+  "type": "library",
   "license": "MIT",
-  "minimum-stability": "stable",
-  "prefer-stable": true,
-  "repositories": [
+  "homepage": "https://github.com/Kowts/pdf-invoices-php",
+  "keywords": [
+    "pdf",
+    "invoice",
+    "invoices",
+    "fatura",
+    "faturas",
+    "billing",
+    "dompdf",
+    "laravel",
+    "symfony",
+    "yii2"
+  ],
+  "authors": [
     {
-      "type": "path",
-      "url": "packages/core",
-      "options": {
-        "symlink": true,
-        "versions": {
-          "pdf-invoices/core": "0.1.0"
-        }
-      }
-    },
-    {
-      "type": "path",
-      "url": "packages/bridge-laravel",
-      "options": {
-        "symlink": true,
-        "versions": {
-          "pdf-invoices/laravel": "0.1.0"
-        }
-      }
-    },
-    {
-      "type": "path",
-      "url": "packages/bridge-yii2",
-      "options": {
-        "symlink": true,
-        "versions": {
-          "pdf-invoices/yii2": "0.1.0"
-        }
-      }
-    },
-    {
-      "type": "path",
-      "url": "packages/bridge-symfony",
-      "options": {
-        "symlink": true,
-        "versions": {
-          "pdf-invoices/symfony": "0.1.0"
-        }
-      }
+      "name": "Kowts",
+      "homepage": "https://github.com/Kowts"
     }
   ],
   "require": {
-    "php": "^8.2",
-    "pdf-invoices/core": "^0.1"
+    "php": "^8.2"
   },
   "require-dev": {
     "dompdf/dompdf": "^2.0 || ^3.0",
     "friendsofphp/php-cs-fixer": "^3.64",
-    "phpunit/phpunit": "^11.5",
+    "illuminate/contracts": "^12.0 || ^13.0",
+    "illuminate/support": "^12.0 || ^13.0",
     "phpstan/phpstan": "^2.1",
-    "rector/rector": "^2.0"
+    "phpunit/phpunit": "^11.5",
+    "rector/rector": "^2.0",
+    "symfony/dependency-injection": "^7.4 || ^8.0",
+    "symfony/http-foundation": "^7.4 || ^8.0",
+    "symfony/http-kernel": "^7.4 || ^8.0",
+    "symfony/translation-contracts": "^3.5"
+  },
+  "suggest": {
+    "dompdf/dompdf": "Necessário para gerar PDFs com o DompdfEngine.",
+    "illuminate/support": "Necessário para usar o Service Provider Laravel.",
+    "symfony/dependency-injection": "Necessário para usar o bundle Symfony.",
+    "symfony/http-kernel": "Necessário para usar o bundle Symfony.",
+    "yiisoft/yii2": "Necessário para usar o componente Yii2."
+  },
+  "autoload": {
+    "psr-4": {
+      "PdfInvoices\\Core\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PdfInvoices\\Core\\Tests\\": "tests/"
+    }
   },
   "scripts": {
     "test": "@php vendor/bin/phpunit",
@@ -73,5 +70,37 @@
   "config": {
     "sort-packages": true,
     "allow-plugins": {}
-  }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "PdfInvoices\\Core\\Bridge\\Laravel\\PdfInvoicesServiceProvider"
+      ],
+      "aliases": {
+        "PdfInvoices": "PdfInvoices\\Core\\Bridge\\Laravel\\Facade\\PdfInvoices"
+      }
+    }
+  },
+  "support": {
+    "issues": "https://github.com/Kowts/pdf-invoices-php/issues",
+    "source": "https://github.com/Kowts/pdf-invoices-php"
+  },
+  "archive": {
+    "name": "pdf-invoices",
+    "exclude": [
+      "/.github",
+      "/.php-cs-fixer.cache",
+      "/.phpunit.cache",
+      "/build",
+      "/vendor",
+      "/.gitattributes",
+      "/.gitignore",
+      "/composer.lock",
+      "/phpstan.neon.dist",
+      "/phpunit.xml.dist",
+      "/rector.php"
+    ]
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }

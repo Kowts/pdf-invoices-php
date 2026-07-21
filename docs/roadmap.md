@@ -2,7 +2,7 @@
 
 ## Fase 0 - Decisões arquiteturais
 
-- Objetivo: ADRs, licença, namespaces, monorepo e compatibilidade.
+- Objetivo: ADRs, licença, namespaces, package Composer e compatibilidade.
 - Estado: concluído.
 - Critérios: `composer.json`, ADRs, CI, NOTICE, `.gitignore`.
 - Dimensão: pequena.
@@ -60,7 +60,7 @@
 
 ## Fase 8 - Documentação, hardening e lançamento
 
-- Guia de instalação por package.
+- Guia de instalação do package.
 - Exemplos completos por framework.
 - Snapshots HTML/PDF.
 - Mutation testing opcional.
@@ -90,4 +90,3 @@ Fora do MVP:
 - filas, mailables e commands;
 - painel de configuração visual;
 - snapshot PDF binário estável.
-

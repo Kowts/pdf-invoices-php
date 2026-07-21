@@ -1,4 +1,4 @@
-# ADR 0001 - Monorepo com packages Composer
+# ADR 0001 - Package Composer unico
 
 ## Estado
 
@@ -6,21 +6,28 @@ Aceite.
 
 ## Contexto
 
-A biblioteca tem um core independente de frameworks e bridges oficiais para
-Laravel, Yii2 e Symfony. O desenvolvimento inicial precisa de alterações
-coordenadas entre contratos, adaptadores, exemplos e documentação.
+A primeira versao foi desenhada como monorepo com packages separados para core
+e bridges. Ao submeter ao Packagist, isso fazia a raiz aparecer como
+`pdf-invoices/php-monorepo`, porque o Packagist le o `composer.json` da raiz.
 
-## Decisão
+O projeto `efaura` usa outro padrao: um package publicavel na raiz, com bridges
+opcionais dentro de `src/Bridge/*`.
 
-Usar um monorepo com `packages/core`, `packages/bridge-laravel`,
-`packages/bridge-yii2` e `packages/bridge-symfony`, cada um publicável como
-package Composer independente.
+## Decisao
 
-## Consequências
+Publicar este repositorio como package unico `kowts/pdf-invoices`.
 
-- A evolução dos contratos do core fica sincronizada com os bridges.
-- O CI pode testar a matriz completa num único pull request.
-- A publicação exige disciplina de versionamento por package.
-- Se os bridges ganharem equipas ou ciclos próprios, podem ser extraídos mais
-  tarde para repositórios separados sem alterar os namespaces públicos.
+O core fica em `src/` e os bridges opcionais ficam em:
+
+- `src/Bridge/Laravel`;
+- `src/Bridge/Yii2`;
+- `src/Bridge/Symfony`.
+
+## Consequencias
+
+- O Packagist encontra o nome correto diretamente no `composer.json` da raiz.
+- A instalacao fica simples: `composer require kowts/pdf-invoices`.
+- As integracoes continuam opcionais via `suggest` e dependencias dev.
+- Se no futuro for necessario separar packages, os bridges podem ser extraidos
+  para repositorios proprios.
 

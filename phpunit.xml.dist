@@ -6,13 +6,12 @@
          cacheDirectory=".phpunit.cache">
     <testsuites>
         <testsuite name="Core">
-            <directory>packages/core/tests</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
     <source>
         <include>
-            <directory>packages/core/src</directory>
+            <directory>src</directory>
         </include>
     </source>
 </phpunit>
-

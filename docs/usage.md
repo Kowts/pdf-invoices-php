@@ -63,7 +63,7 @@ Configuração mínima em `config/web.php`:
 ```php
 'components' => [
     'pdfInvoices' => [
-        'class' => \PdfInvoices\Yii2\PdfInvoicesComponent::class,
+        'class' => \PdfInvoices\Core\Bridge\Yii2\PdfInvoicesComponent::class,
         'template' => 'modern',
         'locale' => 'pt_PT',
     ],

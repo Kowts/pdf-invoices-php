@@ -3,7 +3,12 @@
 declare(strict_types=1);
 
 $finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__ . '/packages')
+    ->in([
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
+        __DIR__ . '/config',
+        __DIR__ . '/resources',
+    ])
     ->name('*.php');
 
 return (new PhpCsFixer\Config())
@@ -15,4 +20,3 @@ return (new PhpCsFixer\Config())
         'single_quote' => true,
     ])
     ->setFinder($finder);
-

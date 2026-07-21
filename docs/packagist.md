@@ -37,7 +37,7 @@ Configure no GitHub:
 Exemplo de `PACKAGIST_PACKAGE_URL`:
 
 ```text
-https://packagist.org/packages/pdf-invoices/core
+https://packagist.org/packages/kowts/pdf-invoices
 ```
 
 Esta workflow e um fallback. Se o GitHub Hook do Packagist estiver ativo, ela

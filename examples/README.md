@@ -26,7 +26,7 @@ ponto de partida para aplicacoes reais.
 
 ## Executar
 
-Depois de instalar as dependencias do monorepo:
+Depois de instalar as dependencias do package:
 
 ```bash
 php examples/plain-php/html-preview.php
@@ -42,4 +42,3 @@ php examples/plain-php/dompdf-pdf.php
 ```
 
 Os ficheiros gerados ficam em `build/`.
-
