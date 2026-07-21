@@ -15,7 +15,6 @@
 - [x] Criar bridges Laravel, Yii2 e Symfony.
 - [x] Adicionar testes unitários do core.
 - [x] Adicionar exemplo plain PHP.
-- [ ] Executar PHPUnit/PHPStan/CS em PHP 8.2+.
+- [x] Executar PHPUnit/PHPStan/CS em PHP 8.2+.
 - [ ] Adicionar testes de integração dos bridges.
-- [ ] Preparar release `0.1.0`.
-
+- [x] Preparar release `0.1.0`.

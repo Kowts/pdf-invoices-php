@@ -358,9 +358,11 @@ O CI executa a matriz em Linux e Windows para PHP 8.2, 8.3 e 8.4.
 - [Regras financeiras](docs/money-rules.md)
 - [Segurança](docs/security.md)
 - [Compatibilidade](docs/compatibility.md)
+- [Changelog](CHANGELOG.md)
 - [Análise do repositório de referência](docs/reference-analysis.md)
 - [Packagist](docs/packagist.md)
 - [Roadmap](docs/roadmap.md)
+- [Security Policy](SECURITY.md)
 - [Checklist de implementação](docs/implementation-checklist.md)
 - [ADR 0001 - Package unico](docs/adr/0001-monorepo.md)
 - [ADR 0002 - Dinheiro](docs/adr/0002-money.md)
@@ -368,17 +370,19 @@ O CI executa a matriz em Linux e Windows para PHP 8.2, 8.3 e 8.4.
 
 ## Estado do projeto
 
-O projeto está em fase alfa. O core, os templates e os bridges iniciais já
-existem, mas ainda faltam testes de integração completos para Laravel, Yii2 e
-Symfony, snapshots de PDF e validação em ambiente PHP 8.2+ no computador local.
+O projeto está em fase beta e pronto para a primeira release `0.1.0`. O core,
+os templates, os exemplos e os bridges iniciais já existem, com CI em Linux e
+Windows para PHP 8.2, 8.3 e 8.4.
+
+Antes de declarar estabilidade `1.0`, ainda faltam testes de integração
+completos para Laravel, Yii2 e Symfony e snapshots de PDF.
 
 ## Roadmap curto
 
 - estabilizar o core `kowts/pdf-invoices`;
 - completar testes de contrato para drivers PDF;
 - adicionar suites de integração dos bridges;
-- publicar o package Composer `kowts/pdf-invoices`;
-- preparar release `0.1.0`;
+- publicar o package Composer `kowts/pdf-invoices` no Packagist;
 - adicionar drivers opcionais para mPDF, TCPDF e Browsershot.
 
 ## Licença
