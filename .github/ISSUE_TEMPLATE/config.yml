@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Perguntas e discussoes
+    url: https://github.com/Kowts/pdf-invoices-php/discussions
+    about: Use discussions para perguntas gerais, ideias iniciais e suporte nao sensivel.
+  - name: Reportar vulnerabilidade
+    url: https://github.com/Kowts/pdf-invoices-php/security/advisories/new
+    about: Nao abra issues publicas para vulnerabilidades.

@@ -1,0 +1,62 @@
+name: Bug report
+description: Reportar um problema reproduzivel no package.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Obrigado por reportar. Inclua apenas dados de exemplo, sem dados reais de clientes.
+  - type: input
+    id: version
+    attributes:
+      label: Versao do package
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: Versao do PHP
+      placeholder: "8.2, 8.3 ou 8.4"
+    validations:
+      required: true
+  - type: dropdown
+    id: context
+    attributes:
+      label: Contexto
+      options:
+        - PHP puro
+        - Laravel
+        - Symfony
+        - Yii2
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Descricao
+      description: Explique o comportamento observado e o comportamento esperado.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Passos para reproduzir
+      placeholder: |
+        1. Criar invoice com...
+        2. Chamar generate(...)
+        3. Ver erro...
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: Exemplo minimo
+      render: php
+  - type: textarea
+    id: logs
+    attributes:
+      label: Erro ou stack trace
+      render: text

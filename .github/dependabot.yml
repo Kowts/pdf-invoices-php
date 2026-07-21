@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: Atlantic/Cape_Verde
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps"
+    groups:
+      composer-dev-tools:
+        dependency-type: development
+        patterns:
+          - "*"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:30"
+      timezone: Atlantic/Cape_Verde
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"

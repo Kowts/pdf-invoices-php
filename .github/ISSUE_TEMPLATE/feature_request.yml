@@ -1,0 +1,40 @@
+name: Feature request
+description: Propor uma melhoria ou novo caso de uso.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema ou caso de uso
+      description: Que necessidade concreta esta feature resolve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposta
+      description: Descreva a API, comportamento ou documentacao esperada.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Core
+        - Templates
+        - PDF engines
+        - Laravel bridge
+        - Symfony bridge
+        - Yii2 bridge
+        - Documentacao
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Opcional.
