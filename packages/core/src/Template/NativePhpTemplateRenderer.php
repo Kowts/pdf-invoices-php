@@ -18,6 +18,7 @@ final readonly class NativePhpTemplateRenderer implements TemplateRendererInterf
         $file = $this->resolver->resolve($template);
 
         ob_start();
+
         $invoice = $context->invoice;
         $totals = $context->totals;
         $t = $context->translator;
@@ -29,4 +30,3 @@ final readonly class NativePhpTemplateRenderer implements TemplateRendererInterf
         return (string) ob_get_clean();
     }
 }
-

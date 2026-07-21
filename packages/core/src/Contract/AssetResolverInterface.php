@@ -8,4 +8,3 @@ interface AssetResolverInterface
 {
     public function resolve(string $pathOrUrl): string;
 }
-

@@ -34,7 +34,6 @@ final readonly class FilesystemTemplateResolver implements TemplateResolverInter
             }
         }
 
-        throw new InvoiceException("Template [{$template}] was not found.");
+        throw new InvoiceException('Template [' . $template . '] was not found.');
     }
 }
-
