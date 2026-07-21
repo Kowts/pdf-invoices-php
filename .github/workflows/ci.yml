@@ -2,11 +2,20 @@ name: CI
 
 on:
   push:
+    branches:
+      - main
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  core:
-    name: Core PHP ${{ matrix.php }} on ${{ matrix.os }}
+  test:
+    name: Tests PHP ${{ matrix.php }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -20,12 +29,24 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
       - uses: ramsey/composer-install@v3
+      - name: Run tests
+        run: composer test
+
+  quality:
+    name: Quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - uses: ramsey/composer-install@v3
+      - name: Validate Composer metadata
+        run: composer validate --no-check-lock --strict
       - name: Check code style
-        if: matrix.php == '8.2'
         run: composer cs
       - name: Run static analysis
         run: composer analyse
-      - name: Run tests
-        run: composer test
       - name: Check Rector
         run: composer rector
