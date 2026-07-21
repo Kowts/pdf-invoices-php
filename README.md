@@ -1,38 +1,382 @@
-# pdf-invoices-php
+# PDF Invoices para PHP
 
-Biblioteca PHP para gerar faturas PDF com core independente de frameworks e
-bridges oficiais para Laravel, Yii2 e Symfony.
+[![Testes](https://github.com/Kowts/pdf-invoices-php/actions/workflows/ci.yml/badge.svg)](https://github.com/Kowts/pdf-invoices-php/actions/workflows/ci.yml)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-4e9a06.svg)](phpstan.neon.dist)
+[![PHP](https://img.shields.io/badge/PHP-%5E8.2-777BB4.svg)](https://www.php.net/)
+[![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-blue.svg)](LICENSE)
+![Status](https://img.shields.io/badge/status-alfa-orange.svg)
 
-## Estado
+Biblioteca PHP independente de frameworks para construir faturas, calcular
+totais monetários com segurança, renderizar templates HTML e gerar documentos
+PDF através de motores substituíveis.
 
-Projeto em implementação inicial. O MVP privilegia:
+O projeto usa um core em PHP puro e bridges oficiais para Laravel, Symfony e
+Yii2, mantendo as regras de domínio fora dos frameworks.
 
-- core PHP puro;
-- cálculos monetários sem `float`;
-- templates PHP nativos;
-- Dompdf como driver opcional;
-- armazenamento local;
-- exemplos sem framework.
+> [!IMPORTANT]
+> Este projeto gera documentos PDF de faturação, mas não substitui validação
+> fiscal, certificação de software, comunicação com autoridades tributárias ou
+> requisitos legais específicos de cada país.
 
-## Packages
+## Funcionalidades
 
-- `pdf-invoices/core`
-- `pdf-invoices/laravel`
-- `pdf-invoices/yii2`
-- `pdf-invoices/symfony`
+- core PHP puro, sem Laravel, Symfony, Yii2, Carbon, Blade, Twig ou facades;
+- monorepo com packages Composer independentes;
+- domínio tipado para fatura, linhas, entidades, moradas, percentagens e moeda;
+- builders fluentes para `Invoice`, `InvoiceItem` e `Party`;
+- cálculos monetários sem `float` como representação principal;
+- valores monetários em unidades mínimas, como cêntimos;
+- quantidades fracionadas representadas em milésimos;
+- descontos por linha e desconto global;
+- impostos por linha, incluídos ou excluídos;
+- múltiplas taxas por linha;
+- retenções;
+- validação básica de faturas antes da geração;
+- templates PHP nativos `minimal`, `modern` e `branded`;
+- tradução base em inglês e português de Portugal;
+- formatação monetária simples e substituível;
+- armazenamento local seguro contra path traversal básico;
+- contrato `PdfEngineInterface` para motores PDF;
+- engine Dompdf opcional;
+- preview HTML para testes e desenvolvimento;
+- bridges oficiais para Laravel, Yii2 e Symfony;
+- responses de download nos bridges;
+- testes PHPUnit preparados para o core;
+- documentação técnica em português.
 
 ## Arquitetura
 
 ```text
-Frameworks
+Aplicações PHP / Laravel / Yii2 / Symfony
     ↓
 Bridges e adaptadores
     ↓
-pdf-invoices-php Core
+pdf-invoices/core
     ↓
-PHP e contratos independentes
+PHP 8.2+ e contratos independentes
 ```
 
-O core não depende de Laravel, Yii2, Symfony, Carbon, Twig, Blade, Eloquent,
-Active Record, facades, helpers globais ou containers específicos.
+O core não conhece os bridges. Os bridges integram containers, tradutores,
+filesystems, responses e configuração de cada framework.
 
+Consulte [Arquitetura](docs/architecture.md) para a organização completa.
+
+## Packages
+
+- `pdf-invoices/core`;
+- `pdf-invoices/laravel`;
+- `pdf-invoices/yii2`;
+- `pdf-invoices/symfony`.
+
+## Requisitos
+
+- PHP 8.2 ou superior;
+- Composer 2;
+- extensão `json`;
+- `dompdf/dompdf`, apenas quando quiser gerar PDF real com Dompdf.
+
+Para desenvolvimento do monorepo:
+
+- PHPUnit 11;
+- PHPStan;
+- PHP-CS-Fixer;
+- Rector.
+
+## Instalação
+
+Quando os packages forem publicados:
+
+```bash
+composer require pdf-invoices/core
+```
+
+Para usar Dompdf:
+
+```bash
+composer require dompdf/dompdf
+```
+
+Para testar antes da publicação no Packagist, clone este monorepo e aponte a
+aplicação consumidora para o package pretendido com um repositório `path`:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../pdf-invoices-php/packages/core",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "require": {
+        "pdf-invoices/core": "^0.1"
+    }
+}
+```
+
+## Utilização rápida
+
+```php
+<?php
+
+use PdfInvoices\Core\Builder\InvoiceBuilder;
+use PdfInvoices\Core\Builder\ItemBuilder;
+use PdfInvoices\Core\Builder\PartyBuilder;
+use PdfInvoices\Core\InvoiceGenerator;
+use PdfInvoices\Core\Storage\LocalStorage;
+use PdfInvoices\Core\ValueObject\Money;
+use PdfInvoices\Core\ValueObject\Percentage;
+use PdfInvoices\Core\ValueObject\Quantity;
+
+require __DIR__ . '/vendor/autoload.php';
+
+$seller = PartyBuilder::create()
+    ->name('Empresa Exemplo, Lda.')
+    ->taxNumber('NIF 123456789')
+    ->email('faturacao@example.test')
+    ->build();
+
+$buyer = PartyBuilder::create()
+    ->name('Cliente Exemplo')
+    ->taxNumber('NIF 987654321')
+    ->email('cliente@example.test')
+    ->build();
+
+$invoice = InvoiceBuilder::create()
+    ->seller($seller)
+    ->buyer($buyer)
+    ->number('FT 2026/001')
+    ->currency('CVE')
+    ->locale('pt_PT')
+    ->addItem(
+        ItemBuilder::create()
+            ->description('Serviços profissionais')
+            ->unitPrice(Money::fromDecimal('1500.00', 'CVE'))
+            ->quantity(Quantity::fromDecimal('2.5'))
+            ->tax(Percentage::fromBasisPoints(1500))
+            ->build()
+    )
+    ->notes('Pagamento a 30 dias.')
+    ->build();
+
+$document = InvoiceGenerator::defaultHtmlPreview()
+    ->generate($invoice, 'modern');
+
+$document->store(
+    new LocalStorage(__DIR__ . '/build'),
+    'invoice-preview.html'
+);
+```
+
+O exemplo completo está em [examples/plain-php/generate.php](examples/plain-php/generate.php).
+
+## Geração de PDF
+
+O core gera documentos através de `PdfEngineInterface`.
+
+Para produção com Dompdf, instale o driver e injete `DompdfEngine` no
+`InvoiceGenerator`:
+
+```php
+use PdfInvoices\Core\Calculation\InvoiceCalculator;
+use PdfInvoices\Core\Formatting\SimpleCurrencyFormatter;
+use PdfInvoices\Core\InvoiceGenerator;
+use PdfInvoices\Core\Localization\ArrayTranslator;
+use PdfInvoices\Core\Pdf\DompdfEngine;
+use PdfInvoices\Core\Template\FilesystemTemplateResolver;
+use PdfInvoices\Core\Template\NativePhpTemplateRenderer;
+use PdfInvoices\Core\Validation\DefaultInvoiceValidator;
+
+$generator = new InvoiceGenerator(
+    new DompdfEngine(),
+    new NativePhpTemplateRenderer(FilesystemTemplateResolver::default()),
+    new InvoiceCalculator(),
+    ArrayTranslator::default(),
+    new SimpleCurrencyFormatter(),
+    new DefaultInvoiceValidator()
+);
+
+$pdf = $generator->generate($invoice, 'branded');
+$pdf->save(__DIR__ . '/invoice.pdf');
+```
+
+Recursos remotos estão desativados por defeito. Ative-os apenas com uma política
+de segurança adequada.
+
+## Integração com Laravel
+
+Instale o bridge na aplicação Laravel:
+
+```bash
+composer require pdf-invoices/laravel
+```
+
+Publique a configuração:
+
+```bash
+php artisan vendor:publish --tag=pdf-invoices-config
+```
+
+Use a API principal por injeção de dependências:
+
+```php
+use PdfInvoices\Core\InvoiceGenerator;
+
+final class InvoiceController
+{
+    public function download(InvoiceGenerator $generator)
+    {
+        $document = $generator->generate($invoice, config('pdf-invoices.template'));
+
+        return response()->streamDownload(
+            fn () => print $document->contents(),
+            'invoice.pdf',
+            ['Content-Type' => $document->mimeType()]
+        );
+    }
+}
+```
+
+A facade existe apenas como conveniência. O uso por container continua a ser a
+API recomendada.
+
+## Integração com Yii2
+
+Instale o bridge na aplicação Yii2:
+
+```bash
+composer require pdf-invoices/yii2
+```
+
+Configuração mínima em `config/web.php`:
+
+```php
+use PdfInvoices\Yii2\PdfInvoicesComponent;
+
+return [
+    'components' => [
+        'pdfInvoices' => [
+            'class' => PdfInvoicesComponent::class,
+            'template' => 'modern',
+            'locale' => 'pt_PT',
+        ],
+    ],
+];
+```
+
+Depois use o componente:
+
+```php
+$document = Yii::$app->pdfInvoices->generate($invoice);
+```
+
+O bridge pode ser usado em aplicações web e console.
+
+## Integração com Symfony
+
+Instale o bridge na aplicação Symfony:
+
+```bash
+composer require pdf-invoices/symfony
+```
+
+Configuração mínima:
+
+```yaml
+pdf_invoices:
+  template: modern
+```
+
+Use por injeção de dependências:
+
+```php
+use PdfInvoices\Core\InvoiceGenerator;
+use Symfony\Component\HttpFoundation\Response;
+
+final readonly class InvoiceController
+{
+    public function __construct(private InvoiceGenerator $generator)
+    {
+    }
+
+    public function __invoke(): Response
+    {
+        $document = $this->generator->generate($invoice);
+
+        return new Response($document->contents(), 200, [
+            'Content-Type' => $document->mimeType(),
+        ]);
+    }
+}
+```
+
+## Regras monetárias
+
+O MVP usa `Money` com unidades mínimas inteiras. Exemplo: `10.24 EUR` é
+representado como `1024`.
+
+As percentagens são representadas em basis points. Exemplo: `1500` representa
+`15%`.
+
+As quantidades usam milésimos para suportar valores como `1.5` ou `2.375`.
+
+Consulte [Regras financeiras](docs/money-rules.md) para detalhes de subtotal,
+descontos, impostos, retenções, arredondamento e notas de crédito.
+
+## Segurança
+
+- escape de HTML nos templates oficiais;
+- recursos remotos desativados por defeito;
+- JavaScript desativado no Dompdf;
+- storage local com bloqueio básico contra path traversal;
+- validação da fatura antes da renderização;
+- sem logging automático de dados fiscais;
+- templates personalizados devem ser tratados como código confiável.
+
+Consulte [Segurança](docs/security.md).
+
+## Qualidade
+
+```bash
+composer validate --no-check-lock --strict
+composer cs
+composer analyse
+composer test
+composer rector
+```
+
+O CI executa a matriz em Linux e Windows para PHP 8.2, 8.3 e 8.4.
+
+## Documentação
+
+- [Arquitetura](docs/architecture.md)
+- [Utilização](docs/usage.md)
+- [Regras financeiras](docs/money-rules.md)
+- [Segurança](docs/security.md)
+- [Compatibilidade](docs/compatibility.md)
+- [Análise do repositório de referência](docs/reference-analysis.md)
+- [Roadmap](docs/roadmap.md)
+- [Checklist de implementação](docs/implementation-checklist.md)
+- [ADR 0001 - Monorepo](docs/adr/0001-monorepo.md)
+- [ADR 0002 - Dinheiro](docs/adr/0002-money.md)
+
+## Estado do projeto
+
+O projeto está em fase alfa. O core, os templates e os bridges iniciais já
+existem, mas ainda faltam testes de integração completos para Laravel, Yii2 e
+Symfony, snapshots de PDF e validação em ambiente PHP 8.2+ no computador local.
+
+## Roadmap curto
+
+- estabilizar o core `pdf-invoices/core`;
+- completar testes de contrato para drivers PDF;
+- adicionar suites de integração dos bridges;
+- publicar packages Composer separados;
+- preparar release `0.1.0`;
+- adicionar drivers opcionais para mPDF, TCPDF e Browsershot.
+
+## Licença
+
+[MIT](LICENSE) © 2026 Kowts.
