@@ -57,10 +57,12 @@ final class InvoiceCalculator
         $discount = $item->discount->applyTo($subtotal);
         $afterDiscount = $subtotal->subtract($discount);
 
-        $tax = Money::zero($item->unitPrice->currency(), $item->unitPrice->fractionDigits());
+        $combinedTaxRate = 0;
         foreach ($item->taxes as $rate) {
-            $tax = $tax->add($this->calculateTax($afterDiscount, $rate, $item->taxIncluded));
+            $combinedTaxRate += $rate->basisPoints();
         }
+
+        $tax = $this->calculateTax($afterDiscount, Percentage::fromBasisPoints($combinedTaxRate), $item->taxIncluded);
 
         $taxableBase = $item->taxIncluded ? $afterDiscount->subtract($tax) : $afterDiscount;
         $total = $item->taxIncluded ? $afterDiscount : $afterDiscount->add($tax);
@@ -79,4 +81,3 @@ final class InvoiceCalculator
         return $amount->multiplyRatio($basisPoints, 10000 + $basisPoints);
     }
 }
-

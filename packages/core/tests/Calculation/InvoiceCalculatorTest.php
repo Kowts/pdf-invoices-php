@@ -60,5 +60,28 @@ final class InvoiceCalculatorTest extends TestCase
 
         self::assertSame(3750, $totals->total->minorAmount());
     }
-}
 
+    public function testItExtractsIncludedMultipleTaxesUsingTheCombinedRate(): void
+    {
+        $invoice = InvoiceBuilder::create()
+            ->seller(PartyBuilder::create()->name('Seller')->build())
+            ->buyer(PartyBuilder::create()->name('Buyer')->build())
+            ->currency('EUR')
+            ->addItem(
+                ItemBuilder::create()
+                    ->description('Tax included')
+                    ->unitPrice(Money::fromMinor(12000, 'EUR'))
+                    ->taxIncluded()
+                    ->tax(Percentage::fromBasisPoints(1000))
+                    ->tax(Percentage::fromBasisPoints(1000))
+                    ->build(),
+            )
+            ->build();
+
+        $totals = (new InvoiceCalculator())->calculate($invoice);
+
+        self::assertSame(10000, $totals->taxableBase->minorAmount());
+        self::assertSame(2000, $totals->tax->minorAmount());
+        self::assertSame(12000, $totals->total->minorAmount());
+    }
+}
