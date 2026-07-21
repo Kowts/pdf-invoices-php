@@ -1,0 +1,7 @@
+parameters:
+    level: max
+    paths:
+        - packages/core/src
+        - packages/core/tests
+    treatPhpDocTypesAsCertain: false
+

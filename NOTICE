@@ -1,0 +1,8 @@
+pdf-invoices-php
+
+This package is distributed under the MIT License.
+
+Architecture and implementation notes were prepared after reviewing a
+MIT-licensed Laravel invoice generator authored by Kidiatoliny. No source code
+or templates from that project are copied into this repository.
+
