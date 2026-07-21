@@ -34,6 +34,55 @@ $document->save(__DIR__ . '/invoice-preview.html');
 Para PDF real, instalar `dompdf/dompdf` e injetar `DompdfEngine` no
 `InvoiceGenerator`.
 
+## Templates customizados
+
+Pode usar os templates oficiais por nome:
+
+```php
+$document = InvoiceGenerator::defaultHtmlPreview()
+    ->generate($invoice, 'modern');
+```
+
+Para adicionar templates da aplicacao sem perder os templates oficiais, crie um
+diretorio com ficheiros `*.php` e configure o resolver com
+`FilesystemTemplateResolver::withDefaultTemplates()`:
+
+```php
+use PdfInvoices\Core\Calculation\InvoiceCalculator;
+use PdfInvoices\Core\Formatting\SimpleCurrencyFormatter;
+use PdfInvoices\Core\InvoiceGenerator;
+use PdfInvoices\Core\Localization\ArrayTranslator;
+use PdfInvoices\Core\Pdf\HtmlPreviewEngine;
+use PdfInvoices\Core\Template\FilesystemTemplateResolver;
+use PdfInvoices\Core\Template\NativePhpTemplateRenderer;
+use PdfInvoices\Core\Validation\DefaultInvoiceValidator;
+
+$generator = new InvoiceGenerator(
+    new HtmlPreviewEngine(),
+    new NativePhpTemplateRenderer(
+        FilesystemTemplateResolver::withDefaultTemplates(__DIR__ . '/templates'),
+    ),
+    new InvoiceCalculator(),
+    ArrayTranslator::default(),
+    new SimpleCurrencyFormatter(),
+    new DefaultInvoiceValidator(),
+);
+
+$document = $generator->generate(
+    $invoice,
+    'compact-brand',
+    theme: [
+        'accent' => '#7c3aed',
+        'brand' => 'Kowts Studio',
+        'footer' => 'Obrigado pela preferencia.',
+    ],
+);
+```
+
+O ficheiro `templates/compact-brand.php` recebe as variaveis `$invoice`,
+`$totals`, `$t`, `$money` e `$theme`. Templates personalizados sao executados
+como PHP, por isso devem ser tratados como codigo confiavel.
+
 ## Laravel
 
 ```php
@@ -104,4 +153,3 @@ final readonly class InvoiceController
     }
 }
 ```
-

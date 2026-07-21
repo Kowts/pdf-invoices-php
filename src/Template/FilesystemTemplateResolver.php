@@ -18,7 +18,12 @@ final readonly class FilesystemTemplateResolver implements TemplateResolverInter
 
     public static function default(): self
     {
-        return new self([dirname(__DIR__, 2) . '/resources/templates']);
+        return new self([self::defaultTemplatePath()]);
+    }
+
+    public static function withDefaultTemplates(string ...$paths): self
+    {
+        return new self([...array_values($paths), self::defaultTemplatePath()]);
     }
 
     public function resolve(string $template): string
@@ -35,5 +40,10 @@ final readonly class FilesystemTemplateResolver implements TemplateResolverInter
         }
 
         throw new InvoiceException('Template [' . $template . '] was not found.');
+    }
+
+    private static function defaultTemplatePath(): string
+    {
+        return dirname(__DIR__, 2) . '/resources/templates';
     }
 }

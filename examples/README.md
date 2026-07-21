@@ -14,6 +14,8 @@ ponto de partida para aplicacoes reais.
   preco.
 - [credit-note.php](plain-php/credit-note.php): demonstra uma nota de credito
   com valores negativos permitidos.
+- [custom-template.php](plain-php/custom-template.php): usa um diretorio de
+  templates proprio com fallback para os templates oficiais.
 - [generate.php](plain-php/generate.php): exemplo inicial mantido por
   compatibilidade.
 
@@ -30,6 +32,7 @@ Depois de instalar as dependencias do package:
 
 ```bash
 php examples/plain-php/html-preview.php
+php examples/plain-php/custom-template.php
 php examples/plain-php/tax-included.php
 php examples/plain-php/credit-note.php
 ```
