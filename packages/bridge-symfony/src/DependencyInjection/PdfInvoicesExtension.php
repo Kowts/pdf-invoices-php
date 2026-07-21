@@ -54,4 +54,3 @@ final class PdfInvoicesExtension extends Extension
         ]))->setPublic(true);
     }
 }
-

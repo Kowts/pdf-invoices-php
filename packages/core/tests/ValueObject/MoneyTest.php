@@ -33,4 +33,3 @@ final class MoneyTest extends TestCase
         Money::fromMinor(100, 'EURO');
     }
 }
-

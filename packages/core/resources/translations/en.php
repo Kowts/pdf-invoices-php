@@ -19,4 +19,3 @@ return [
     'total' => 'Total',
     'notes' => 'Notes',
 ];
-

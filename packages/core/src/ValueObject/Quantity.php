@@ -61,4 +61,3 @@ final readonly class Quantity
         return $whole . '.' . rtrim(str_pad((string) $fraction, 3, '0', STR_PAD_LEFT), '0');
     }
 }
-

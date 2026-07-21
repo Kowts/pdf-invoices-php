@@ -13,4 +13,3 @@ final class HtmlPreviewEngine implements PdfEngineInterface
         return new GeneratedDocument($html, 'text/html');
     }
 }
-

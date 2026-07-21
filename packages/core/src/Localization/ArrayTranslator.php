@@ -38,4 +38,3 @@ final readonly class ArrayTranslator implements TranslatorInterface
         return $line;
     }
 }
-

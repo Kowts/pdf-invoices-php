@@ -30,4 +30,3 @@ final readonly class InvoiceItem
         return $this->attributes[$key] ?? $default;
     }
 }
-

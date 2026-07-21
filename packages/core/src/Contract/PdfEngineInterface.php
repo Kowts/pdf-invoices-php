@@ -11,4 +11,3 @@ interface PdfEngineInterface
 {
     public function render(string $html, PdfOptions $options): GeneratedDocument;
 }
-

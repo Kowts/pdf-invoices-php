@@ -13,4 +13,3 @@ interface InvoiceValidatorInterface
      */
     public function validate(Invoice $invoice): array;
 }
-

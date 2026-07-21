@@ -22,4 +22,3 @@ final class ValidationException extends InvoiceException
         return $this->errors;
     }
 }
-

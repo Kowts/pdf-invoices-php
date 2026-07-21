@@ -16,4 +16,3 @@ final class PdfInvoicesBootstrap implements BootstrapInterface
         }
     }
 }
-

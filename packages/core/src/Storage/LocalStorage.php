@@ -74,4 +74,3 @@ final readonly class LocalStorage implements StorageInterface
         return $target;
     }
 }
-

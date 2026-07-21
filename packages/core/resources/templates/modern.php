@@ -60,4 +60,3 @@ $accent = (string) ($theme['accent'] ?? '#0f766e');
     <?php include __DIR__ . '/table.php'; ?>
 </body>
 </html>
-

@@ -10,4 +10,3 @@ interface TemplateRendererInterface
 {
     public function render(string $template, TemplateContext $context): string;
 }
-

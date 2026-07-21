@@ -35,4 +35,3 @@ final readonly class LaravelStorage implements StorageInterface
         return $this->disk->delete($path);
     }
 }
-

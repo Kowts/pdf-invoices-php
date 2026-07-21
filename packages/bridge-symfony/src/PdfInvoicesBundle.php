@@ -9,4 +9,3 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 final class PdfInvoicesBundle extends Bundle
 {
 }
-

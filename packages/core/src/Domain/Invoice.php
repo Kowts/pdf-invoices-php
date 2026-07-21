@@ -35,4 +35,3 @@ final readonly class Invoice
         return $this->attributes[$key] ?? $default;
     }
 }
-

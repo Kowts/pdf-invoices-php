@@ -17,4 +17,3 @@ final class SimpleCurrencyFormatter implements CurrencyFormatterInterface
         return $amount . $separator . $money->currency();
     }
 }
-

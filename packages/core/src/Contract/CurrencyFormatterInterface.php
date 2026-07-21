@@ -10,4 +10,3 @@ interface CurrencyFormatterInterface
 {
     public function format(Money $money, ?string $locale = null): string;
 }
-

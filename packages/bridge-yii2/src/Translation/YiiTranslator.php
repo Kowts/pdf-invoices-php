@@ -19,4 +19,3 @@ final class YiiTranslator implements TranslatorInterface
         return Yii::t('pdf-invoices', $key, $params, $locale);
     }
 }
-

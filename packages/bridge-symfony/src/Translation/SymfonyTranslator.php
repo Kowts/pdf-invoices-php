@@ -23,4 +23,3 @@ final readonly class SymfonyTranslator implements TranslatorInterface
         return $this->translator->trans('invoice.' . $key, $parameters, 'pdf_invoices', $locale);
     }
 }
-

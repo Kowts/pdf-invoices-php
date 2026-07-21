@@ -38,4 +38,3 @@ final class DefaultInvoiceValidator implements InvoiceValidatorInterface
         return $errors;
     }
 }
-

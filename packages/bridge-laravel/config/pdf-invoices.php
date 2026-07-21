@@ -11,4 +11,3 @@ return [
     'engine' => DompdfEngine::class,
     'remote_resources' => false,
 ];
-

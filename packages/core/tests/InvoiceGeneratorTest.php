@@ -34,4 +34,3 @@ final class InvoiceGeneratorTest extends TestCase
         self::assertStringContainsString('&lt;script&gt;alert(1)&lt;/script&gt;', $document->contents());
     }
 }
-

@@ -60,4 +60,3 @@ final class PdfInvoicesServiceProvider extends ServiceProvider
         ], 'pdf-invoices-config');
     }
 }
-

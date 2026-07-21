@@ -87,4 +87,3 @@ $locale = $invoice->locale;
     <?php endif; ?>
 </body>
 </html>
-

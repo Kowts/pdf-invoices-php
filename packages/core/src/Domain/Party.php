@@ -25,4 +25,3 @@ final readonly class Party
         return $this->attributes[$key] ?? $default;
     }
 }
-

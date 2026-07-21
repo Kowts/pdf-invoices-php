@@ -8,4 +8,3 @@ interface TemplateResolverInterface
 {
     public function resolve(string $template): string;
 }
-

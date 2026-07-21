@@ -20,4 +20,3 @@ final readonly class LaravelTranslator implements TranslatorInterface
         return is_string($line) ? $line : $key;
     }
 }
-

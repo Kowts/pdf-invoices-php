@@ -30,4 +30,3 @@ final class DompdfEngine implements PdfEngineInterface
         return new GeneratedDocument($dompdf->output());
     }
 }
-

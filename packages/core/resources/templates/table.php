@@ -39,4 +39,3 @@ use PdfInvoices\Core\Support\Escaper;
         <?= nl2br(Escaper::html($invoice->notes)) ?>
     </div>
 <?php endif; ?>
-

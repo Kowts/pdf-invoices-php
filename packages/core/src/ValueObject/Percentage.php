@@ -47,4 +47,3 @@ final readonly class Percentage
         return $money->multiplyRatio($this->basisPoints, 10000);
     }
 }
-

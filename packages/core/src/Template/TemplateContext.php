@@ -25,4 +25,3 @@ final readonly class TemplateContext
     ) {
     }
 }
-

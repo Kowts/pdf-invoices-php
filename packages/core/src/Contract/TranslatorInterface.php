@@ -11,4 +11,3 @@ interface TranslatorInterface
      */
     public function trans(string $key, array $replace = [], ?string $locale = null): string;
 }
-

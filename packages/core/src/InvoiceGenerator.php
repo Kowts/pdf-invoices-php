@@ -70,4 +70,3 @@ final readonly class InvoiceGenerator
         return $this->pdfEngine->render($html, $options);
     }
 }
-

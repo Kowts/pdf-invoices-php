@@ -41,4 +41,3 @@ final readonly class GeneratedDocument
         return $storage->put($path, $this->contents);
     }
 }
-

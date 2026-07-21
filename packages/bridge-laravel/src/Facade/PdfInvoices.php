@@ -14,4 +14,3 @@ final class PdfInvoices extends Facade
         return InvoiceGenerator::class;
     }
 }
-

@@ -40,4 +40,3 @@ if (! function_exists('pdf_invoices_party_block')) {
         return implode('<br>', $parts);
     }
 }
-

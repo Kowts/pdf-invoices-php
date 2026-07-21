@@ -14,4 +14,3 @@ interface StorageInterface
 
     public function delete(string $path): bool;
 }
-
