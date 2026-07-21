@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PdfInvoices\Core\Pdf;
 
+use Closure;
 use PdfInvoices\Core\Contract\PdfEngineInterface;
 use PdfInvoices\Core\Exception\InvoiceException;
 use Spatie\Browsershot\Browsershot;
@@ -17,6 +18,7 @@ final readonly class BrowsershotEngine implements PdfEngineInterface
         private int $timeoutSeconds = 60,
         private bool $noSandbox = false,
         private bool $disableJavascript = true,
+        private ?Closure $browserFactory = null,
     ) {
     }
 
@@ -26,7 +28,11 @@ final readonly class BrowsershotEngine implements PdfEngineInterface
             throw new InvoiceException('Browsershot is not installed. Run composer require spatie/browsershot.');
         }
 
-        $browser = Browsershot::html($html)
+        $browser = $this->browserFactory instanceof Closure
+            ? ($this->browserFactory)($html)
+            : Browsershot::html($html);
+
+        $browser
             ->format($options->format)
             ->margins(
                 $options->marginTopMm,
