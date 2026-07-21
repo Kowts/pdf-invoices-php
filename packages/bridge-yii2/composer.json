@@ -1,0 +1,17 @@
+{
+  "name": "pdf-invoices/yii2",
+  "description": "Yii2 bridge for pdf-invoices/core.",
+  "type": "yii2-extension",
+  "license": "MIT",
+  "require": {
+    "php": "^8.2",
+    "pdf-invoices/core": "*",
+    "yiisoft/yii2": "^2.0.55"
+  },
+  "autoload": {
+    "psr-4": {
+      "PdfInvoices\\Yii2\\": "src/"
+    }
+  }
+}
+
