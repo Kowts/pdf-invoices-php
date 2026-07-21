@@ -33,6 +33,7 @@
 
 - Objetivo: provider, bindings, config, facade opcional, translator, storage e response.
 - Estado: esqueleto funcional.
+- Testes: suite de integracao leve com container/config reais.
 - Testes futuros: Orchestra Testbench Laravel 12/13.
 - Dimensão: média.
 
@@ -40,6 +41,7 @@
 
 - Objetivo: componente configurável, bootstrap, tradução e response.
 - Estado: esqueleto funcional.
+- Testes: suite de integracao leve com stubs Yii2.
 - Testes futuros: app Yii2 web e console.
 - Dimensão: média.
 
@@ -47,6 +49,7 @@
 
 - Objetivo: bundle, extension DI, translator e response.
 - Estado: esqueleto funcional.
+- Testes: suite de integracao leve com ContainerBuilder real.
 - Testes futuros: KernelTestCase Symfony 7.4/8.
 - Dimensão: média.
 

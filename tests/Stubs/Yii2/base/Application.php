@@ -10,9 +10,12 @@ class Application
 {
     public Response $response;
 
+    /** @var array<string, class-string|object> */
+    public array $components = [];
+
     public function has(string $id): bool
     {
-        return false;
+        return array_key_exists($id, $this->components);
     }
 
     /**
@@ -20,5 +23,6 @@ class Application
      */
     public function set(string $id, string|object $definition): void
     {
+        $this->components[$id] = $definition;
     }
 }

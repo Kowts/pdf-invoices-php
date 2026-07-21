@@ -14,6 +14,7 @@ projeto usa [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Drivers PDF opcionais para mPDF, TCPDF e Browsershot.
 - Exemplos plain PHP para templates customizados e drivers PDF alternativos.
 - Testes de contrato para mPDF e TCPDF.
+- Suites de integracao iniciais para os bridges Laravel, Symfony e Yii2.
 
 ## [0.1.0] - 2026-07-21
 

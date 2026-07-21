@@ -16,5 +16,5 @@
 - [x] Adicionar testes unitários do core.
 - [x] Adicionar exemplo plain PHP.
 - [x] Executar PHPUnit/PHPStan/CS em PHP 8.2+.
-- [ ] Adicionar testes de integração dos bridges.
+- [x] Adicionar testes de integração dos bridges.
 - [x] Preparar release `0.1.0`.
