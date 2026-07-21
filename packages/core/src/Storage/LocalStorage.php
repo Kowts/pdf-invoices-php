@@ -67,7 +67,10 @@ final readonly class LocalStorage implements StorageInterface
         }
 
         $directoryReal = realpath($targetDirectory) ?: $targetDirectory;
-        if (! str_starts_with($directoryReal, $baseReal)) {
+        $normalizedBase = rtrim(str_replace('\\', '/', $baseReal), '/');
+        $normalizedDirectory = rtrim(str_replace('\\', '/', $directoryReal), '/');
+
+        if (! str_starts_with($normalizedDirectory, $normalizedBase)) {
             throw new InvoiceException('Storage path escapes the base directory.');
         }
 

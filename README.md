@@ -364,6 +364,7 @@ O CI executa a matriz em Linux e Windows para PHP 8.2, 8.3 e 8.4.
 - [Checklist de implementação](docs/implementation-checklist.md)
 - [ADR 0001 - Monorepo](docs/adr/0001-monorepo.md)
 - [ADR 0002 - Dinheiro](docs/adr/0002-money.md)
+- [Exemplos completos](examples/README.md)
 
 ## Estado do projeto
 
