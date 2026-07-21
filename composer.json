@@ -12,7 +12,7 @@
       "options": {
         "symlink": true,
         "versions": {
-          "pdf-invoices/core": "0.1.x-dev"
+          "pdf-invoices/core": "0.1.0"
         }
       }
     },
@@ -22,7 +22,7 @@
       "options": {
         "symlink": true,
         "versions": {
-          "pdf-invoices/laravel": "0.1.x-dev"
+          "pdf-invoices/laravel": "0.1.0"
         }
       }
     },
@@ -32,7 +32,7 @@
       "options": {
         "symlink": true,
         "versions": {
-          "pdf-invoices/yii2": "0.1.x-dev"
+          "pdf-invoices/yii2": "0.1.0"
         }
       }
     },
@@ -42,7 +42,7 @@
       "options": {
         "symlink": true,
         "versions": {
-          "pdf-invoices/symfony": "0.1.x-dev"
+          "pdf-invoices/symfony": "0.1.0"
         }
       }
     }
